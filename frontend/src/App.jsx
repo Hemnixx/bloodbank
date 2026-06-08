@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from './authSlice';
 import PublicBoard from './PublicBoard';
-import login from './Login';
+import Login from './login';
 import Dashboard from './Dashboard';
 // Change your import to include FaHome:
 import { FaHeartbeat, FaGlobe, FaTachometerAlt, FaSignOutAlt, FaSignInAlt, FaHome } from 'react-icons/fa';
