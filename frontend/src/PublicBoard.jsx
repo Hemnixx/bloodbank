@@ -24,7 +24,7 @@ export default function PublicBoard() {
 
     const fetchLiveRequests = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/requests');
+            const response = await axios.get('https://bloodunite-backend.onrender.com/api/requests');
             // Filter out 'fulfilled' requests, but keep 'pending' and 'accepted'
             const activeRequests = response.data.data.filter(req => req.status !== 'fulfilled');
             setRequests(activeRequests);
@@ -58,7 +58,7 @@ export default function PublicBoard() {
 
         try {
             // Update the backend status to 'accepted'
-            await axios.put(`http://localhost:3000/api/requests/${selectedEmergency}`, 
+            await axios.put(`https://bloodunite-backend.onrender.com/api/requests/${selectedEmergency}`, 
                 { status: 'accepted' }, 
                 { headers: { Authorization: `Bearer ${token}` } }
             );

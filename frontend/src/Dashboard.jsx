@@ -24,7 +24,7 @@ export default function Dashboard() {
 
     const fetchMyHistory = async (token) => {
         try {
-            const response = await axios.get('http://localhost:3000/api/my-requests', {
+            const response = await axios.get('https://bloodunite-backend.onrender.com/api/my-requests', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setMyRequests(response.data.data);
@@ -40,7 +40,7 @@ export default function Dashboard() {
         const toastId = toast.loading("Broadcasting to donors...");
 
         try {
-            await axios.post('http://localhost:3000/api/requests', {
+            await axios.post('https://bloodunite-backend.onrender.com/api/requests', {
                 patientName, bloodGroupRequired: bloodGroup, location, urgency
             }, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -58,7 +58,7 @@ export default function Dashboard() {
     const handleMarkFulfilled = async (id) => {
         const token = localStorage.getItem('token');
         try {
-            await axios.put(`http://localhost:3000/api/requests/${id}`, 
+            await axios.put(`https://bloodunite-backend.onrender.com/api/requests/${id}`, 
                 { status: 'fulfilled' },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -76,7 +76,7 @@ export default function Dashboard() {
         
         const token = localStorage.getItem('token');
         try {
-            await axios.delete(`http://localhost:3000/api/requests/${id}`, {
+            await axios.delete(`https://bloodunite-backend.onrender.com/api/requests/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.success("Request permanently deleted.");
