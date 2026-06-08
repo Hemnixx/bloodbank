@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from './authSlice';
 import PublicBoard from './PublicBoard';
 import Login from './login';
+import Register from './Register.jsx'; // Add this line!
 import Dashboard from './Dashboard';
 // Change your import to include FaHome:
 import { FaHeartbeat, FaGlobe, FaTachometerAlt, FaSignOutAlt, FaSignInAlt, FaHome } from 'react-icons/fa';
@@ -40,9 +41,10 @@ function App() {
 
         <main className="main-container">
           <Routes>
-            <Route path="/" element={<PublicBoard />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+<Route path="/" element={<PublicBoard />} />
+<Route path="/login" element={<Login />} />
+<Route path="/register" element={<Register />} /> {/* Add this line! */}
+<Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </main>
       </div>
