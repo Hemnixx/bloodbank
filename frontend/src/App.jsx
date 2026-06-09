@@ -6,6 +6,7 @@ import Login from './login';
 import Register from './Register.jsx'; // Add this line!
 import Dashboard from './Dashboard';
 import PostRequest from './PostRequest';
+import RequestBoard from './RequestBoard';
 // Change your import to include FaHome:
 import { FaHeartbeat, FaGlobe, FaTachometerAlt, FaSignOutAlt, FaSignInAlt, FaHome } from 'react-icons/fa';
 
@@ -24,17 +25,18 @@ function App() {
       <div>
         <header className="app-header">
           <h1 className="logo-text"><FaHeartbeat style={{ marginBottom: '-3px' }}/> BloodUnite</h1>
-          <nav className="nav-links">
-            <Link to="/"><FaGlobe /> Live Board</Link>
-            {isAuthenticated ? (
-              <>
-               <Link to="/dashboard"><FaHome /> Homepage</Link>
-                <button onClick={handleLogout}><FaSignOutAlt /> Logout</button>
-              </>
-            ) : (
-              <Link to="/login"><FaSignInAlt /> Donor Login</Link>
-            )}
-          </nav>
+         <nav className="nav-links">
+    <Link to="/"><FaHome /> Home</Link>
+    <Link to="/requests"><FaGlobe /> Live Requests</Link> 
+    {isAuthenticated ? (
+        <>
+            <Link to="/dashboard"><FaTachometerAlt /> Dashboard</Link>
+            <button onClick={handleLogout}><FaSignOutAlt /> Logout</button>
+        </>
+    ) : (
+        <Link to="/login"><FaSignInAlt /> Login</Link>
+    )}
+</nav>
         </header>
 
         {/* The Notification Engine */}
@@ -47,6 +49,7 @@ function App() {
     <Route path="/register" element={<Register />} /> {/* */}
     <Route path="/dashboard" element={<Dashboard />} />
     <Route path="/post-request" element={<PostRequest />} />
+    <Route path="/requests" element={<RequestBoard />} />
 </Routes>
         </main>
       </div>
