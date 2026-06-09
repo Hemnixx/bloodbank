@@ -7,6 +7,7 @@ import Register from './Register.jsx'; // Add this line!
 import Dashboard from './Dashboard';
 import PostRequest from './PostRequest';
 import RequestBoard from './RequestBoard';
+import UserSelection from './UserSelection';
 // Change your import to include FaHome:
 import { FaHeartbeat, FaGlobe, FaTachometerAlt, FaSignOutAlt, FaSignInAlt, FaHome } from 'react-icons/fa';
 
@@ -25,12 +26,15 @@ function App() {
       <div>
         <header className="app-header">
           <h1 className="logo-text"><FaHeartbeat style={{ marginBottom: '-3px' }}/> BloodUnite</h1>
-       <nav className="nav-links" key={isAuthenticated}> 
+
+<nav className="nav-links">
   <Link to="/">Home</Link>
   <Link to="/requests">Live Requests</Link>
+  
+  {/* Yahan `isAuthenticated` check sahi se kaam karna chahiye */}
   {isAuthenticated ? (
     <>
-      <Link to="/dashboard">Dashboard</Link>
+      <Link to="/selection">Dashboard</Link> {/* Yahan dashboard ki jagah selection bhej dein */}
       <button onClick={handleLogout}>Logout</button>
     </>
   ) : (

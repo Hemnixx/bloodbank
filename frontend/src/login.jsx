@@ -22,28 +22,28 @@ export default function Login() {
                 password: password
             });
 
-            // 1. Save token to browser
+            // 1. Token save karein
             localStorage.setItem('token', response.data.token);
             
-            // 2. Dispatch token and user to Redux
+            // 2. Redux mein dispatch karein
             dispatch(loginSuccess({ 
                 token: response.data.token, 
                 user: response.data.user 
             }));
             
-            // 3. Navigate only on success
+            // 3. Success hone par hi redirect karein
             alert('Login Successful!');
-            navigate('/selection');
+            navigate('/selection'); 
             
         } catch (err) {
-            setError(err.response?.data?.message || 'Server error occurred');
+            setError(err.response?.data?.message || 'Invalid email or password');
         }
     };
 
     return (
         <div style={{ padding: '20px' }}>
             <div style={{ maxWidth: '400px', margin: '40px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
-                <h2 style={{ color: '#dc3545' }}>Donor Login</h2>
+                <h2 style={{ color: '#dc3545', textAlign: 'center' }}>Donor Login</h2>
                 
                 {error && (
                     <div style={{ backgroundColor: '#f8d7da', color: '#721c24', padding: '10px', borderRadius: '5px', marginBottom: '15px' }}>
