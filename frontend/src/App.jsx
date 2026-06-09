@@ -45,6 +45,7 @@ function App() {
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} /> {/* */}
     <Route path="/dashboard" element={<Dashboard />} />
+    <Route path="/post-request" element={<PostRequest />} />
 </Routes>
         </main>
       </div>
