@@ -40,12 +40,12 @@ function App() {
         <ToastContainer position="bottom-right" theme="colored" autoClose={3000} />
 
         <main className="main-container">
-          <Routes>
-<Route path="/" element={<PublicBoard />} />
-<Route path="/login" element={<Login />} />
-<Route path="/register" element={<Register />} /> {/* Add this line! */}
-<Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
+     <Routes>
+    <Route path="/" element={<PublicBoard />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/register" element={<Register />} /> {/* */}
+    <Route path="/dashboard" element={<Dashboard />} />
+</Routes>
         </main>
       </div>
     </Router>
