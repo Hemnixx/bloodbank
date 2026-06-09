@@ -5,6 +5,7 @@ import PublicBoard from './PublicBoard';
 import Login from './login';
 import Register from './Register.jsx'; // Add this line!
 import Dashboard from './Dashboard';
+import PostRequest from './PostRequest';
 // Change your import to include FaHome:
 import { FaHeartbeat, FaGlobe, FaTachometerAlt, FaSignOutAlt, FaSignInAlt, FaHome } from 'react-icons/fa';
 
