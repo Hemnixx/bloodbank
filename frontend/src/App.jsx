@@ -25,17 +25,17 @@ function App() {
       <div>
         <header className="app-header">
           <h1 className="logo-text"><FaHeartbeat style={{ marginBottom: '-3px' }}/> BloodUnite</h1>
-         <nav className="nav-links">
-    <Link to="/"><FaHome /> Home</Link>
-    <Link to="/requests"><FaGlobe /> Live Requests</Link> 
-    {isAuthenticated ? (
-        <>
-            <Link to="/dashboard"><FaTachometerAlt /> Dashboard</Link>
-            <button onClick={handleLogout}><FaSignOutAlt /> Logout</button>
-        </>
-    ) : (
-        <Link to="/login"><FaSignInAlt /> Login</Link>
-    )}
+       <nav className="nav-links">
+  <Link to="/">Home</Link>
+  <Link to="/requests">Live Requests</Link>
+  {isAuthenticated ? (
+    <>
+      <Link to="/dashboard">Dashboard</Link>
+      <button onClick={handleLogout}>Logout</button>
+    </>
+  ) : (
+    <Link to="/login">Login</Link>
+  )}
 </nav>
         </header>
 
