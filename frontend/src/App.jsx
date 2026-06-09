@@ -50,6 +50,7 @@ function App() {
     <Route path="/dashboard" element={<Dashboard />} />
     <Route path="/post-request" element={<PostRequest />} />
     <Route path="/requests" element={<RequestBoard />} />
+    <Route path="/selection" element={<UserSelection />} />
 </Routes>
         </main>
       </div>

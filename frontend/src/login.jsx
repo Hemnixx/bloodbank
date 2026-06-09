@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from './authSlice';
-import { Link } from 'react-router-dom';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -11,9 +10,9 @@ export default function Login() {
     const [error, setError] = useState('');
     
     const navigate = useNavigate();
-    const dispatch = useDispatch(); // The messenger that talks to Redux!
+    const dispatch = useDispatch();
 
-const handleLogin = async (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         setError('');
 
@@ -26,36 +25,61 @@ const handleLogin = async (e) => {
             // 1. Save token to browser
             localStorage.setItem('token', response.data.token);
             
-            // 2. IMPORTANT: Send BOTH token and user object to Redux!
+            // 2. Dispatch token and user to Redux
             dispatch(loginSuccess({ 
                 token: response.data.token, 
                 user: response.data.user 
             }));
             
+            // 3. Navigate only on success
             alert('Login Successful!');
-            navigate('/dashboard');
+            navigate('/selection');
             
         } catch (err) {
             setError(err.response?.data?.message || 'Server error occurred');
         }
     };
 
-return (
-        // 2. Add this wrapper div:
+    return (
         <div style={{ padding: '20px' }}>
             <div style={{ maxWidth: '400px', margin: '40px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
                 <h2 style={{ color: '#dc3545' }}>Donor Login</h2>
-                {error && <div style={{ backgroundColor: '#f8d7da', color: '#721c24', padding: '10px', borderRadius: '5px', marginBottom: '15px' }}>{error}</div>}
+                
+                {error && (
+                    <div style={{ backgroundColor: '#f8d7da', color: '#721c24', padding: '10px', borderRadius: '5px', marginBottom: '15px' }}>
+                        {error}
+                    </div>
+                )}
+
                 <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                    <input type="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} required />
-                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} required />
-                    <button type="submit" style={{ padding: '10px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}>Login</button>
+                    <input 
+                        type="email" 
+                        placeholder="Email Address" 
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)} 
+                        style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} 
+                        required 
+                    />
+                    <input 
+                        type="password" 
+                        placeholder="Password" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }} 
+                        required 
+                    />
+                    <button 
+                        type="submit" 
+                        style={{ padding: '10px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}
+                    >
+                        Login
+                    </button>
                 </form>
             </div>
             
-            {/* 3. Moved the link inside the wrapper */}
             <p style={{ textAlign: 'center', marginTop: '15px', fontSize: '0.9rem' }}>
-                Don't have an account? <Link to="/register" style={{ color: 'var(--primary-red)' }}>Register here</Link>.
+                Don't have an account? <Link to="/register" style={{ color: '#dc3545' }}>Register here</Link>.
             </p>
         </div>
-    );}
+    );
+}
