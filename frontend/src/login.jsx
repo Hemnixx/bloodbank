@@ -13,7 +13,7 @@ export default function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch(); // The messenger that talks to Redux!
 
-    const handleLogin = async (e) => {
+const handleLogin = async (e) => {
         e.preventDefault();
         setError('');
 
@@ -23,11 +23,14 @@ export default function Login() {
                 password: password
             });
 
-            // 1. Save to browser memory
+            // 1. Save token to browser
             localStorage.setItem('token', response.data.token);
             
-            // 2. Send the token to the Redux Vault!
-            dispatch(loginSuccess(response.data.token));
+            // 2. IMPORTANT: Send BOTH token and user object to Redux!
+            dispatch(loginSuccess({ 
+                token: response.data.token, 
+                user: response.data.user 
+            }));
             
             alert('Login Successful!');
             navigate('/dashboard');
