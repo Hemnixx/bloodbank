@@ -12,3 +12,4 @@ const PatientDashboard = () => {
     </div>
   );
 };
+export default PatientDashboard;
