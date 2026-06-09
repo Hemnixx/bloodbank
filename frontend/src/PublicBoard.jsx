@@ -20,3 +20,4 @@ const PublicBoard = () => {
     </div>
   );
 };
+export default PublicBoard;
