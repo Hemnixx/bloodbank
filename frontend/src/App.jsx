@@ -25,7 +25,7 @@ function App() {
       <div>
         <header className="app-header">
           <h1 className="logo-text"><FaHeartbeat style={{ marginBottom: '-3px' }}/> BloodUnite</h1>
-       <nav className="nav-links">
+       <nav className="nav-links" key={isAuthenticated}> 
   <Link to="/">Home</Link>
   <Link to="/requests">Live Requests</Link>
   {isAuthenticated ? (
