@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom'; // 1. Import for navigation
-import { useSelector } from 'react-redux';       // 2. Import to check login state
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const RequestBoard = () => {
   const [requests, setRequests] = useState([]);
   const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
+  // Data fetch karne ke liye
   useEffect(() => {
     const fetchRequests = async () => {
       try {
@@ -21,14 +22,36 @@ const RequestBoard = () => {
     fetchRequests();
   }, []);
 
-  // 3. Logic to handle the "Donate" button
-  const handleDonate = (requestId) => {
+  // DONATE button ka asli logic
+  const handleDonate = async (requestId) => {
+    // 1. Pehle check karein ki user logged in hai ya nahi
     if (!isAuthenticated) {
-      toast.warn("Please login or register to donate!");
+      toast.warn("Please login to donate!");
       navigate('/login');
-    } else {
-      toast.info("Donation process initiated for request: " + requestId);
-      // Here you would eventually trigger a PUT request to update the status
+      return;
+    }
+
+    // 2. Agar logged in hai, toh API call karein
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`https://bloodunite-backend.onrender.com/api/requests/${requestId}`, {
+        method: 'PUT',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+        },
+        body: JSON.stringify({ status: 'accepted' })
+      });
+
+      if (response.ok) {
+        toast.success("Request accepted! Thank you for donating.");
+        // UI ko update karne ke liye local state refresh karein
+        setRequests(requests.filter(req => req._id !== requestId));
+      } else {
+        toast.error("Failed to update status");
+      }
+    } catch (error) {
+      toast.error("Error connecting to server");
     }
   };
 
@@ -42,12 +65,13 @@ const RequestBoard = () => {
             <p><strong>Blood Group:</strong> {req.bloodGroupRequired}</p>
             <p><strong>Location:</strong> {req.location}</p>
             <p><strong>Urgency:</strong> {req.urgency}</p>
-            {/* 4. Attach the handler to the button */}
+            <p><strong>Status:</strong> {req.status}</p>
+            
             <button 
               onClick={() => handleDonate(req._id)}
-              style={{ backgroundColor: '#dc3545', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '5px', cursor: 'pointer' }}
+              style={{ backgroundColor: '#28a745', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '5px', cursor: 'pointer' }}
             >
-              Donate
+              Donate Blood
             </button>
           </div>
         ))}
